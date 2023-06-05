@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mourya Kuntamukkala\\Desktop\\Nallas\\Training\\SampleWebApp\\SampleWebAppUnitTest\\SampleWebAppUnitTests.csproj": {}
+    "C:\\Users\\Mourya Kuntamukkala\\Desktop\\Nallas\\Github\\Nallas\\SampleWebApp\\SampleWebAppUnitTest\\SampleWebAppUnitTests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mourya Kuntamukkala\\Desktop\\Nallas\\Training\\SampleWebApp\\SampleWebAppUnitTest\\SampleWebAppUnitTests.csproj": {
+    "C:\\Users\\Mourya Kuntamukkala\\Desktop\\Nallas\\Github\\Nallas\\SampleWebApp\\SampleWebAppUnitTest\\SampleWebAppUnitTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mourya Kuntamukkala\\Desktop\\Nallas\\Training\\SampleWebApp\\SampleWebAppUnitTest\\SampleWebAppUnitTests.csproj",
+        "projectUniqueName": "C:\\Users\\Mourya Kuntamukkala\\Desktop\\Nallas\\Github\\Nallas\\SampleWebApp\\SampleWebAppUnitTest\\SampleWebAppUnitTests.csproj",
         "projectName": "SampleWebAppUnitTests",
-        "projectPath": "C:\\Users\\Mourya Kuntamukkala\\Desktop\\Nallas\\Training\\SampleWebApp\\SampleWebAppUnitTest\\SampleWebAppUnitTests.csproj",
+        "projectPath": "C:\\Users\\Mourya Kuntamukkala\\Desktop\\Nallas\\Github\\Nallas\\SampleWebApp\\SampleWebAppUnitTest\\SampleWebAppUnitTests.csproj",
         "packagesPath": "C:\\Users\\Mourya Kuntamukkala\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mourya Kuntamukkala\\Desktop\\Nallas\\Training\\SampleWebApp\\SampleWebAppUnitTest\\obj\\",
+        "outputPath": "C:\\Users\\Mourya Kuntamukkala\\Desktop\\Nallas\\Github\\Nallas\\SampleWebApp\\SampleWebAppUnitTest\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Mourya Kuntamukkala\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Mourya Kuntamukkala\\Desktop\\Nallas\\Training\\SampleWebApp\\SampleWebApp\\SampleWebApp.csproj": {
-                "projectPath": "C:\\Users\\Mourya Kuntamukkala\\Desktop\\Nallas\\Training\\SampleWebApp\\SampleWebApp\\SampleWebApp.csproj"
+              "C:\\Users\\Mourya Kuntamukkala\\Desktop\\Nallas\\Github\\Nallas\\SampleWebApp\\SampleWebApp\\SampleWebApp.csproj": {
+                "projectPath": "C:\\Users\\Mourya Kuntamukkala\\Desktop\\Nallas\\Github\\Nallas\\SampleWebApp\\SampleWebApp\\SampleWebApp.csproj"
               }
             }
           }
@@ -44,9 +44,13 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "AngularJS.Core": {
+              "target": "Package",
+              "version": "[1.8.2, )"
+            },
             "MSTest.TestAdapter": {
               "target": "Package",
-              "version": "[2.2.10, )"
+              "version": "[3.0.4, )"
             },
             "MSTest.TestFramework": {
               "target": "Package",
@@ -57,8 +61,10 @@
               "version": "[17.6.1, )"
             },
             "coverlet.collector": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[3.2.0, )"
+              "version": "[6.0.0, )"
             }
           },
           "imports": [
@@ -81,14 +87,14 @@
         }
       }
     },
-    "C:\\Users\\Mourya Kuntamukkala\\Desktop\\Nallas\\Training\\SampleWebApp\\SampleWebApp\\SampleWebApp.csproj": {
+    "C:\\Users\\Mourya Kuntamukkala\\Desktop\\Nallas\\Github\\Nallas\\SampleWebApp\\SampleWebApp\\SampleWebApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mourya Kuntamukkala\\Desktop\\Nallas\\Training\\SampleWebApp\\SampleWebApp\\SampleWebApp.csproj",
+        "projectUniqueName": "C:\\Users\\Mourya Kuntamukkala\\Desktop\\Nallas\\Github\\Nallas\\SampleWebApp\\SampleWebApp\\SampleWebApp.csproj",
         "projectName": "SampleWebApp",
-        "projectPath": "C:\\Users\\Mourya Kuntamukkala\\Desktop\\Nallas\\Training\\SampleWebApp\\SampleWebApp\\SampleWebApp.csproj",
+        "projectPath": "C:\\Users\\Mourya Kuntamukkala\\Desktop\\Nallas\\Github\\Nallas\\SampleWebApp\\SampleWebApp\\SampleWebApp.csproj",
         "packagesPath": "C:\\Users\\Mourya Kuntamukkala\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mourya Kuntamukkala\\Desktop\\Nallas\\Training\\SampleWebApp\\SampleWebApp\\obj\\",
+        "outputPath": "C:\\Users\\Mourya Kuntamukkala\\Desktop\\Nallas\\Github\\Nallas\\SampleWebApp\\SampleWebApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Mourya Kuntamukkala\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -118,6 +124,10 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "AngularJS.Core": {
+              "target": "Package",
+              "version": "[1.8.2, )"
+            },
             "MSTest.TestFramework": {
               "target": "Package",
               "version": "[3.0.4, )"

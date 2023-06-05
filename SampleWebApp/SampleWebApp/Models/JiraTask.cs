@@ -1,16 +1,16 @@
 ﻿public enum JiraStatuses
 {
-	ToDo,
-	InProgress,
-	CodeReview,
-	Testing,
-	Done
+	ToDo = 1,
+	InProgress = 2,
+	CodeReview = 3,
+	Testing = 4,
+	Done = 5
 }
 
 public enum Assignees
 {
-	A1,
-	A2
+	A1 = 1,
+	A2 = 2
 }
 
 public class JiraTask

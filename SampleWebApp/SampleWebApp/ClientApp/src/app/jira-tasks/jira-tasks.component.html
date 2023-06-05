@@ -1,0 +1,57 @@
+<h2>Jira Tasks</h2>
+<ul>
+  <li *ngFor="let task of jiraTasks">
+    {{ task.name }} (Status: {{ jiraStatuses[task.status] }}, Assigned To: {{ assignees[task.assignedTo] }})
+    <button (click)="openUpdateForm(task)">Update</button>
+    <button (click)="deleteTask(task)">Delete</button>
+  </li>
+</ul>
+
+<h2>Create New Jira Task</h2>
+<div>
+  <label for="taskName">Name:</label>
+  <input id="taskName" type="text" [(ngModel)]="newTask.name">
+
+  <label for="taskStatus">Status:</label>
+  <select id="taskStatus" [(ngModel)]="newTask.status">
+    <option [ngValue]="jiraStatuses.ToDo">To Do</option>
+    <option [ngValue]="jiraStatuses.InProgress">In Progress</option>
+    <option [ngValue]="jiraStatuses.CodeReview">Code Review</option>
+    <option [ngValue]="jiraStatuses.Testing">Testing</option>
+    <option [ngValue]="jiraStatuses.Done">Done</option>
+  </select>
+
+  <label for="taskAssignedTo">Assigned To:</label>
+  <select id="taskAssignedTo" [(ngModel)]="newTask.assignedTo">
+    <option [ngValue]="assignees.A1">A1</option>
+    <option [ngValue]="assignees.A2">A2</option>
+  </select>
+
+  <button (click)="createTask()">Create</button>
+</div>
+
+<div *ngIf="showUpdateForm">
+  <h2>Update Jira Task</h2>
+  <div>
+    <label for="updateTaskName">Name:</label>
+    <input id="updateTaskName" type="text" [(ngModel)]="updateTask.name">
+
+    <label for="updateTaskStatus">Status:</label>
+    <select id="updateTaskStatus" [(ngModel)]="updateTask.status">
+      <option [ngValue]="jiraStatuses.ToDo">To Do</option>
+      <option [ngValue]="jiraStatuses.InProgress">In Progress</option>
+      <option [ngValue]="jiraStatuses.CodeReview">Code Review</option>
+      <option [ngValue]="jiraStatuses.Testing">Testing</option>
+      <option [ngValue]="jiraStatuses.Done">Done</option>
+    </select>
+
+    <label for="updateTaskAssignedTo">Assigned To:</label>
+    <select id="updateTaskAssignedTo" [(ngModel)]="updateTask.assignedTo">
+      <option [ngValue]="assignees.A1">A1</option>
+      <option [ngValue]="assignees.A2">A2</option>
+    </select>
+
+    <button (click)="updateTaskEntry()">Update</button>
+    <button (click)="cancelUpdate()">Cancel</button>
+  </div>
+</div>

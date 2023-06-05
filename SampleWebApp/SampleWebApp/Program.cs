@@ -3,7 +3,14 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<JiraTaskDb>(opt => opt.UseInMemoryDatabase("JiraTask"));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddCors();
 var app = builder.Build();
+
+// Enable CORS
+app.UseCors(builder => builder
+	.AllowAnyOrigin()
+	.AllowAnyMethod()
+	.AllowAnyHeader());
 
 //Get Requests
 app.MapGet("/jiratasks", async (JiraTaskDb db) =>
@@ -73,4 +80,5 @@ app.MapDelete("/jiratasks/{id}", async (int id, JiraTaskDb db) =>
 	return Results.NotFound();
 });
 
+app.UseStaticFiles();
 app.Run();

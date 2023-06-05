@@ -127,3 +127,9 @@ C:\Users\Mourya Kuntamukkala\Desktop\Nallas\Training\SampleWebApp\SampleWebApp\b
 C:\Users\Mourya Kuntamukkala\Desktop\Nallas\Training\SampleWebApp\SampleWebApp\bin\Debug\net7.0\zh-Hant\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
 C:\Users\Mourya Kuntamukkala\Desktop\Nallas\Training\SampleWebApp\SampleWebApp\bin\Debug\net7.0\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
 C:\Users\Mourya Kuntamukkala\Desktop\Nallas\Training\SampleWebApp\SampleWebApp\bin\Debug\net7.0\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\Mourya Kuntamukkala\Desktop\Nallas\Training\SampleWebApp\SampleWebApp\bin\Debug\net7.0\ClientApp\angular.json
+C:\Users\Mourya Kuntamukkala\Desktop\Nallas\Training\SampleWebApp\SampleWebApp\bin\Debug\net7.0\ClientApp\package-lock.json
+C:\Users\Mourya Kuntamukkala\Desktop\Nallas\Training\SampleWebApp\SampleWebApp\bin\Debug\net7.0\ClientApp\package.json
+C:\Users\Mourya Kuntamukkala\Desktop\Nallas\Training\SampleWebApp\SampleWebApp\bin\Debug\net7.0\ClientApp\tsconfig.app.json
+C:\Users\Mourya Kuntamukkala\Desktop\Nallas\Training\SampleWebApp\SampleWebApp\bin\Debug\net7.0\ClientApp\tsconfig.json
+C:\Users\Mourya Kuntamukkala\Desktop\Nallas\Training\SampleWebApp\SampleWebApp\bin\Debug\net7.0\ClientApp\tsconfig.spec.json

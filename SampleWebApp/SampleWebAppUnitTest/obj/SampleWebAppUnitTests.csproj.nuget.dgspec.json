@@ -48,6 +48,14 @@
               "target": "Package",
               "version": "[1.8.2, )"
             },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[11.5.2, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[11.3.0, )"
+            },
             "MSTest.TestAdapter": {
               "target": "Package",
               "version": "[3.0.4, )"
@@ -127,6 +135,14 @@
             "AngularJS.Core": {
               "target": "Package",
               "version": "[1.8.2, )"
+            },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[11.5.2, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[11.3.0, )"
             },
             "MSTest.TestFramework": {
               "target": "Package",

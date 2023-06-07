@@ -1,9 +1,12 @@
 using Microsoft.EntityFrameworkCore;
+using FluentValidation.Results;
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddDbContext<JiraTaskDb>(opt => opt.UseInMemoryDatabase("JiraTask"));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddCors();
+
 var app = builder.Build();
 
 // Enable CORS
@@ -43,21 +46,40 @@ app.MapGet("/jiratasks/{id}", async (int id, JiraTaskDb db) =>
 			? Results.Ok(jiratask)
 			: Results.NotFound());
 
-//Post Requests
+// Post Requests
 app.MapPost("/jiratasks", async (JiraTask inputJiraTask, JiraTaskDb db) =>
 {
+	var validator = new JiraTaskValidator();
+	ValidationResult result = await validator.ValidateAsync(inputJiraTask);
+
+	if (!result.IsValid)
+	{
+		return Results.BadRequest(result.Errors);
+	}
+
 	db.JiraTasks.Add(inputJiraTask);
 	await db.SaveChangesAsync();
 
 	return Results.Created($"/jiratasks/{inputJiraTask.Id}", inputJiraTask);
 });
 
-//Put Requests
+// Put Requests
 app.MapPut("/jiratasks/{id}", async (int id, JiraTask inputJiraTask, JiraTaskDb db) =>
 {
+	var validator = new JiraTaskValidator();
+	ValidationResult result = await validator.ValidateAsync(inputJiraTask);
+
+	if (!result.IsValid)
+	{
+		return Results.BadRequest(result.Errors);
+	}
+
 	var jiraTask = await db.JiraTasks.FindAsync(id);
 
-	if (jiraTask is null) return Results.NotFound();
+	if (jiraTask is null)
+	{
+		return Results.NotFound();
+	}
 
 	jiraTask.Name = inputJiraTask.Name;
 	jiraTask.Status = inputJiraTask.Status;
@@ -66,6 +88,7 @@ app.MapPut("/jiratasks/{id}", async (int id, JiraTask inputJiraTask, JiraTaskDb 
 
 	return Results.Created($"/jiratasks/{inputJiraTask.Id}", inputJiraTask);
 });
+
 
 //Delete Requests
 app.MapDelete("/jiratasks/{id}", async (int id, JiraTaskDb db) =>

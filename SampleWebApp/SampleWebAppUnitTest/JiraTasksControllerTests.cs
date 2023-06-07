@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace SampleWebAppUnitTests
 {
@@ -109,9 +110,63 @@ namespace SampleWebAppUnitTests
 		}
 
 		[TestMethod]
+		public async Task CreateJiraTask_WithInvalidValidTask_ReturnsValidationErrors()
+		{
+			var invalidTask = new JiraTask { Id = 14, Name = "testing", Status = JiraStatuses.Done, AssignedTo = Assignees.A1 };
+
+			var dbOptions = new DbContextOptionsBuilder<JiraTaskDb>()
+				.UseInMemoryDatabase(databaseName: "TestDb")
+				.Options;
+
+			using (var dbContext = new JiraTaskDb(dbOptions))
+			{
+				var controller = new JiraTasksController(dbContext);
+
+				var result = await controller.CreateJiraTask(invalidTask);
+
+				// Assert
+				Assert.IsInstanceOfType(result.Result, typeof(BadRequestObjectResult));
+				var badRequestObjectResult = (BadRequestObjectResult)result.Result;
+				var errorMessages = (List<FluentValidation.Results.ValidationFailure>)badRequestObjectResult.Value;
+
+				Assert.AreEqual(true, errorMessages[0].ErrorMessage.Contains("name should contain word task"));
+				Assert.AreEqual(true, errorMessages[1].ErrorMessage.Contains("Status cannot be Done"));
+			}
+		}
+
+		[TestMethod]
 		public async Task UpdateJiraTask_WithValidIdAndTask_ReturnsNoContentResult()
 		{
 			var task = new JiraTask { Id = 5, Name = "Task 5", Status = JiraStatuses.ToDo, AssignedTo = Assignees.A1 };
+			var updatedInvalidTask = new JiraTask { Id = 5, Name = "new", Status = JiraStatuses.InProgress, AssignedTo = Assignees.A2 };
+
+			var dbOptions = new DbContextOptionsBuilder<JiraTaskDb>()
+				.UseInMemoryDatabase(databaseName: "TestDb")
+				.Options;
+
+			using (var dbContext = new JiraTaskDb(dbOptions))
+			{
+				dbContext.JiraTasks.Add(task);
+				dbContext.SaveChanges();
+
+				var controller = new JiraTasksController(dbContext);
+
+				var result = await controller.UpdateJiraTask(task.Id, updatedInvalidTask);
+
+				// Assert
+				// Assert
+				Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+				var badRequestObjectResult = (BadRequestObjectResult)result;
+				var errorMessages = (List<FluentValidation.Results.ValidationFailure>)badRequestObjectResult.Value;
+
+				Assert.AreEqual(true, errorMessages[0].ErrorMessage.Contains("name should be between 4 to 30 characters"));
+			}
+		}
+
+		[TestMethod]
+		public async Task UpdateJiraTask_WithInvalidValidTask_ReturnsValidationErrors()
+		{
+			var task = new JiraTask { Id = 15, Name = "Task 15", Status = JiraStatuses.ToDo, AssignedTo = Assignees.A1 };
 			var updatedTask = new JiraTask { Id = 5, Name = "Updated Task 5", Status = JiraStatuses.InProgress, AssignedTo = Assignees.A2 };
 
 			var dbOptions = new DbContextOptionsBuilder<JiraTaskDb>()

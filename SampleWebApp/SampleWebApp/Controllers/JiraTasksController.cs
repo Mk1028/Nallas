@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation.Results;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 [ApiController]
@@ -33,6 +34,14 @@ public class JiraTasksController : ControllerBase
 	[HttpPost]
 	public async Task<ActionResult<JiraTask>> CreateJiraTask(JiraTask inputJiraTask)
 	{
+		var validator = new JiraTaskValidator();
+		ValidationResult result = await validator.ValidateAsync(inputJiraTask);
+
+		if (!result.IsValid)
+		{
+			return BadRequest(result.Errors);
+		}
+
 		_db.JiraTasks.Add(inputJiraTask);
 		await _db.SaveChangesAsync();
 
@@ -50,6 +59,14 @@ public class JiraTasksController : ControllerBase
 		jiraTask.Name = inputJiraTask.Name;
 		jiraTask.Status = inputJiraTask.Status;
 		jiraTask.AssignedTo = inputJiraTask.AssignedTo;
+
+		var validator = new JiraTaskValidator();
+		ValidationResult result = await validator.ValidateAsync(jiraTask);
+
+		if (!result.IsValid)
+		{
+			return BadRequest(result.Errors);
+		}
 
 		await _db.SaveChangesAsync();
 

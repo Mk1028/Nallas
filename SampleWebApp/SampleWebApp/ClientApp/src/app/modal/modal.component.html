@@ -1,0 +1,50 @@
+<form [formGroup]="newTaskForm" (ngSubmit)="createTask()">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">New Jira</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
+  </div>
+  <div class="modal-body">
+    <mdb-form-control>
+      <label mdbLabel class="form-label" for="typeText">Name</label>
+      <input mdbInput type="text" id="typeText" class="form-control" formControlName="name" placeholder="Name" />
+      <div *ngIf="newTaskForm.controls['name'].invalid && newTaskForm.controls['name'].touched" class="requiredError">
+        Name is required
+      </div>
+    </mdb-form-control>
+
+    <div class="form-group">
+      <label for="statusSelect" class="form-label">Status</label>
+      <select id="statusSelect" class="form-control" formControlName="status" required>
+        <option [ngValue]="jiraStatuses.ToDo">To Do</option>
+        <option [ngValue]="jiraStatuses.InProgress">In Progress</option>
+        <option [ngValue]="jiraStatuses.CodeReview">Code Review</option>
+        <option [ngValue]="jiraStatuses.Testing">Testing</option>
+        <option [ngValue]="jiraStatuses.Done">Done</option>
+      </select>
+      <div *ngIf="newTaskForm.controls['status'].invalid && newTaskForm.controls['status'].touched" class="requiredError">
+        Status is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="assignedToSelect" class="form-label">Assigned To</label>
+      <select id="assignedToSelect" class="form-control" formControlName="assignedTo" required>
+        <option [ngValue]="assignees.A1">A1</option>
+        <option [ngValue]="assignees.A2">A2</option>
+      </select>
+      <div *ngIf="newTaskForm.controls['assignedTo'].invalid && newTaskForm.controls['assignedTo'].touched" class="requiredError">
+        Assigned To is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="messageTextarea" class="form-label">Description</label>
+      <textarea id="messageTextarea" class="form-control" rows="4"></textarea>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modalRef.close()">Close</button>
+    <button type="submit" class="btn btn-primary">Create</button>
+  </div>
+</form>

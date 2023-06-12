@@ -1,0 +1,130 @@
+.sidebar {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 16px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.createJira {
+  width: 90%;
+  margin-top: 50px;
+  color:aquamarine;
+}
+
+.sidebar p {
+  margin-top:50px;
+  font-size:25px;
+  color:red;
+  font:200
+}
+
+.sidebar span{
+  font-size: 12px;
+  color: #818181;
+  display: block;
+}
+
+.sidebar a {
+  font-size: 20px;
+  color: #f1f1f1;
+}
+
+.sidebar a:hover {
+  color: red;
+}
+
+.main {
+  margin-left: 250px;
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidebar {
+    padding-top: 15px;
+  }
+}
+
+.jira-details {
+  margin-top: 10%;
+  font-size: 20px;
+  width: 100%;
+}
+
+  .jira-details th {
+    font-size: 24px;
+  }
+
+  .jira-details button {
+    margin-left: 10px;
+  }
+
+.edit-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #888888;
+}
+
+.edit-button i:hover {
+    color: black;
+}
+
+.jiraName {
+  width: 90%;
+  font-size: 140%;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  overflow-wrap: break-word;
+  border: none;
+  outline: none;
+}
+
+textarea {
+  scrollbar-width: thin;
+  resize: none;
+}
+
+  textarea::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  textarea::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  textarea::-webkit-scrollbar-thumb {
+    background-color: #888888;
+  }
+
+    textarea::-webkit-scrollbar-thumb:hover {
+      background-color: #555555;
+    }
+
+.todo {
+  color: aquamarine;
+}
+
+.inprogress {
+  color: yellow;
+}
+
+.codereview {
+  color: cornflowerblue;
+}
+
+.testing {
+  color: red;
+}
+
+.done {
+  color: limegreen;
+}

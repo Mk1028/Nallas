@@ -19,7 +19,6 @@ public class JiraTask
 	public required string Name { get; set; }
 	public JiraStatuses Status { get; set; }
 	public required Assignees AssignedTo { get; set; }
-
 	public JiraTask()
 	{
 		Status = JiraStatuses.ToDo; // Set default value to ToDo

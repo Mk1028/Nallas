@@ -7,7 +7,7 @@ public class JiraTaskValidator : AbstractValidator<JiraTask>
 		RuleFor(task => task.Name)
 			.Cascade(CascadeMode.StopOnFirstFailure)
 			.NotEmpty().WithMessage("name is required")
-			.Length(4, 30).WithMessage("name should be between 4 to 30 characters")
+			.Length(4, 200).WithMessage("name should be between 4 to 200 characters")
 			.Must(m => m?.ToLower().Contains("task") == true).WithMessage("name should contain word task");
 
 		RuleFor(task => task.AssignedTo)

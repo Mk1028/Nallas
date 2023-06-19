@@ -17,7 +17,7 @@ public class ReadMessageService : BackgroundService
 		{
 			this.logger.LogInformation("Reading Message from Azure Queue Storage - Start");
 
-			string connectionString = "DefaultEndpointsProtocol=https;AccountName=samplewebapp;AccountKey=VQKO7WrFjCDHeYm2kZCtgOBFIPTLCMqFwLua7gRdWyAfE/cW4C7A8CVPkwrhzUfrT6wlCJ2NLNHx+AStD91ymA==;EndpointSuffix=core.windows.net";
+			string connectionString = "";
 			string queueName = "myqueue-items";
 			var queueClient = new QueueClient(connectionString, queueName);
 

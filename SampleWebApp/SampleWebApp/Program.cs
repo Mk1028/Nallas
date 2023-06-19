@@ -80,7 +80,7 @@ app.MapGet("/jiratasks/{id}", async (int id, JiraTaskDb db) =>
 app.MapPost("/jiratasks", async (JiraTask inputJiraTask, JiraTaskDb db) =>
 {
 	/*// Sending message to the queue in Azure
-	string connectionString = "DefaultEndpointsProtocol=https;AccountName=samplewebapp;AccountKey=VQKO7WrFjCDHeYm2kZCtgOBFIPTLCMqFwLua7gRdWyAfE/cW4C7A8CVPkwrhzUfrT6wlCJ2NLNHx+AStD91ymA==;EndpointSuffix=core.windows.net";
+	string connectionString = "";
 	string queueName = "myqueue-items";
 	var queueClient = new QueueClient(connectionString, queueName);
 

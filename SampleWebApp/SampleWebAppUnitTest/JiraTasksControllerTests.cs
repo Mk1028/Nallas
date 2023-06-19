@@ -12,8 +12,8 @@ namespace SampleWebAppUnitTests
 		{
 			var tasks = new List<JiraTask>
 			{
-				new JiraTask { Id = 1, Name = "Task 1", Status = JiraStatuses.ToDo, AssignedTo = Assignees.A1 },
-				new JiraTask { Id = 2, Name = "Task 2", Status = JiraStatuses.InProgress, AssignedTo = Assignees.A2 }
+				new JiraTask { Id = 1, Name = "Task 1", Status = JiraStatuses.ToDo, AssignedTo = Assignees.Person1 },
+				new JiraTask { Id = 2, Name = "Task 2", Status = JiraStatuses.InProgress, AssignedTo = Assignees.Person2 }
 			};
 
 			var dbOptions = new DbContextOptionsBuilder<JiraTaskDb>()
@@ -42,7 +42,7 @@ namespace SampleWebAppUnitTests
 		[TestMethod]
 		public async Task GetJiraTask_WithValidId_ReturnsOkResultWithTask()
 		{
-			var task = new JiraTask { Id = 3, Name = "Task 3", Status = JiraStatuses.ToDo, AssignedTo = Assignees.A1 };
+			var task = new JiraTask { Id = 3, Name = "Task 3", Status = JiraStatuses.ToDo, AssignedTo = Assignees.Person1 };
 
 			var dbOptions = new DbContextOptionsBuilder<JiraTaskDb>()
 				.UseInMemoryDatabase(databaseName: "TestDb")
@@ -88,7 +88,7 @@ namespace SampleWebAppUnitTests
 		[TestMethod]
 		public async Task CreateJiraTask_WithValidTask_ReturnsCreatedAtActionResult()
 		{
-			var task = new JiraTask { Id = 4, Name = "Task 4", Status = JiraStatuses.ToDo, AssignedTo = Assignees.A1 };
+			var task = new JiraTask { Id = 4, Name = "Task 4", Status = JiraStatuses.ToDo, AssignedTo = Assignees.Person1 };
 
 			var dbOptions = new DbContextOptionsBuilder<JiraTaskDb>()
 				.UseInMemoryDatabase(databaseName: "TestDb")
@@ -112,7 +112,7 @@ namespace SampleWebAppUnitTests
 		[TestMethod]
 		public async Task CreateJiraTask_WithInvalidValidTask_ReturnsValidationErrors()
 		{
-			var invalidTask = new JiraTask { Id = 14, Name = "testing", Status = JiraStatuses.Done, AssignedTo = Assignees.A1 };
+			var invalidTask = new JiraTask { Id = 14, Name = "testing", Status = JiraStatuses.Done, AssignedTo = Assignees.Person1 };
 
 			var dbOptions = new DbContextOptionsBuilder<JiraTaskDb>()
 				.UseInMemoryDatabase(databaseName: "TestDb")
@@ -137,8 +137,8 @@ namespace SampleWebAppUnitTests
 		[TestMethod]
 		public async Task UpdateJiraTask_WithValidIdAndTask_ReturnsNoContentResult()
 		{
-			var task = new JiraTask { Id = 5, Name = "Task 5", Status = JiraStatuses.ToDo, AssignedTo = Assignees.A1 };
-			var updatedInvalidTask = new JiraTask { Id = 5, Name = "new", Status = JiraStatuses.InProgress, AssignedTo = Assignees.A2 };
+			var task = new JiraTask { Id = 5, Name = "Task 5", Status = JiraStatuses.ToDo, AssignedTo = Assignees.Person1 };
+			var updatedInvalidTask = new JiraTask { Id = 5, Name = "new", Status = JiraStatuses.InProgress, AssignedTo = Assignees.Person2 };
 
 			var dbOptions = new DbContextOptionsBuilder<JiraTaskDb>()
 				.UseInMemoryDatabase(databaseName: "TestDb")
@@ -154,20 +154,19 @@ namespace SampleWebAppUnitTests
 				var result = await controller.UpdateJiraTask(task.Id, updatedInvalidTask);
 
 				// Assert
-				// Assert
 				Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
 				var badRequestObjectResult = (BadRequestObjectResult)result;
 				var errorMessages = (List<FluentValidation.Results.ValidationFailure>)badRequestObjectResult.Value;
 
-				Assert.AreEqual(true, errorMessages[0].ErrorMessage.Contains("name should be between 4 to 30 characters"));
+				Assert.AreEqual(true, errorMessages[0].ErrorMessage.Contains("name should be between 4 to 200 characters"));
 			}
 		}
 
 		[TestMethod]
 		public async Task UpdateJiraTask_WithInvalidValidTask_ReturnsValidationErrors()
 		{
-			var task = new JiraTask { Id = 15, Name = "Task 15", Status = JiraStatuses.ToDo, AssignedTo = Assignees.A1 };
-			var updatedTask = new JiraTask { Id = 5, Name = "Updated Task 5", Status = JiraStatuses.InProgress, AssignedTo = Assignees.A2 };
+			var task = new JiraTask { Id = 15, Name = "Task 15", Status = JiraStatuses.ToDo, AssignedTo = Assignees.Person1 };
+			var updatedTask = new JiraTask { Id = 5, Name = "Updated Task 5", Status = JiraStatuses.InProgress, AssignedTo = Assignees.Person2 };
 
 			var dbOptions = new DbContextOptionsBuilder<JiraTaskDb>()
 				.UseInMemoryDatabase(databaseName: "TestDb")
@@ -202,7 +201,7 @@ namespace SampleWebAppUnitTests
 			{
 				var controller = new JiraTasksController(dbContext);
 
-				var result = await controller.UpdateJiraTask(12, new JiraTask { Id = 13, Name = "Updated Task", AssignedTo = Assignees.A1 });
+				var result = await controller.UpdateJiraTask(12, new JiraTask { Id = 13, Name = "Updated Task", AssignedTo = Assignees.Person1 });
 
 				// Assert
 				Assert.IsInstanceOfType(result, typeof(NotFoundResult));
@@ -212,7 +211,7 @@ namespace SampleWebAppUnitTests
 		[TestMethod]
 		public async Task DeleteJiraTask_WithValidId_ReturnsOkResult()
 		{
-			var task = new JiraTask { Id = 6, Name = "Task 6", Status = JiraStatuses.ToDo, AssignedTo = Assignees.A1 };
+			var task = new JiraTask { Id = 6, Name = "Task 6", Status = JiraStatuses.ToDo, AssignedTo = Assignees.Person1 };
 
 			var dbOptions = new DbContextOptionsBuilder<JiraTaskDb>()
 				.UseInMemoryDatabase(databaseName: "TestDb")

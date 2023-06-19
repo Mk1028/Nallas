@@ -17,5 +17,7 @@ public class JiraTaskValidator : AbstractValidator<JiraTask>
 			.Cascade(CascadeMode.StopOnFirstFailure)
 			.IsInEnum().WithMessage("Invalid status")
 			.NotEqual(JiraStatuses.Done).WithMessage("Status cannot be Done");
+		//RuleFor(task => task.Email).EmailAddress().WithMessage("Invalid Format");
+		//RuleFor(task => task.Description).MinimumLength(100).WithMessage("Description should alteast be 100 characters");
 	}
 }

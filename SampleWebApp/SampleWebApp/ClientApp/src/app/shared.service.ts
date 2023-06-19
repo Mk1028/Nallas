@@ -11,8 +11,11 @@ export enum JiraStatuses {
 }
 
 export enum Assignees {
-  A1 = 1,
-  A2 = 2
+    Person1 = 1,
+    Person2 = 2,
+    Person3 = 3,
+    Person4 = 4,
+    Person5 = 5
 }
 
 export interface JiraTask {

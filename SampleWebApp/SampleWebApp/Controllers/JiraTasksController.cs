@@ -1,9 +1,12 @@
-﻿using FluentValidation.Results;
+﻿using Azure.Storage.Queues;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 
 [ApiController]
 [Route("api/[controller]")]
+[Produces("application/json")]
 public class JiraTasksController : ControllerBase
 {
 	private readonly JiraTaskDb _db;
@@ -59,6 +62,7 @@ public class JiraTasksController : ControllerBase
 		jiraTask.Name = inputJiraTask.Name;
 		jiraTask.Status = inputJiraTask.Status;
 		jiraTask.AssignedTo = inputJiraTask.AssignedTo;
+		jiraTask.Description = inputJiraTask.Description;
 
 		var validator = new JiraTaskValidator();
 		ValidationResult result = await validator.ValidateAsync(jiraTask);

@@ -53,8 +53,11 @@
       <td style="text-align:right"><span>AssignedTo</span></td>
       <td style="text-align:left;padding-left:5px;">
         <select class="button is-small is-danger is-light" [(ngModel)]="selectedJira.assignedTo" (change)="updateJiraStatusOrAssignee()">
-          <option [ngValue]="assignees.A1">A1</option>
-          <option [ngValue]="assignees.A2">A2</option>
+          <option [ngValue]="assignees.Person1">Person1</option>
+          <option [ngValue]="assignees.Person2">Person2</option>
+          <option [ngValue]="assignees.Person3">Person3</option>
+          <option [ngValue]="assignees.Person4">Person4</option>
+          <option [ngValue]="assignees.Person5">Person5</option>
         </select>
       </td>
     </tr>

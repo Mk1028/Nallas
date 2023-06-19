@@ -14,7 +14,7 @@ export class ModalComponent implements OnInit {
     id: 0,
     name: '',
     status: JiraStatuses.ToDo,
-    assignedTo: Assignees.A1
+    assignedTo: Assignees.Person1
   };
   jiraStatuses = JiraStatuses;
   assignees = Assignees;

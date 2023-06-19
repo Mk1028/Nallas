@@ -16,7 +16,7 @@ export class JiraTasksComponent implements OnInit {
     id: 0,
     name: '',
     status: JiraStatuses.ToDo,
-    assignedTo: Assignees.A1
+    assignedTo: Assignees.Person1
   };
   showUpdateForm = false;
   sideNavOpen = false;

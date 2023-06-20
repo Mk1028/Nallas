@@ -19,14 +19,14 @@ public class JiraTasksController : ControllerBase
 	[HttpGet]
 	public async Task<ActionResult<List<JiraTask>>> GetJiraTasks()
 	{
-		var tasks = await _db.JiraTasks.ToListAsync();
+		var tasks = (await _db.GetJiraTasksAsync()).ToList();
 		return Ok(tasks);
 	}
 
 	[HttpGet("{id}")]
-	public async Task<ActionResult<JiraTask>> GetJiraTask(int id)
+	public async Task<ActionResult<JiraTask>> GetJiraTask(Guid id)
 	{
-		var task = await _db.JiraTasks.FindAsync(id);
+		var task = await _db.GetJiraTaskByIdAsync(id.ToString());
 
 		if (task == null)
 			return NotFound();
@@ -45,48 +45,45 @@ public class JiraTasksController : ControllerBase
 			return BadRequest(result.Errors);
 		}
 
-		_db.JiraTasks.Add(inputJiraTask);
-		await _db.SaveChangesAsync();
+		await _db.AddJiraTaskAsync(inputJiraTask);
 
 		return CreatedAtAction(nameof(GetJiraTask), new { id = inputJiraTask.Id }, inputJiraTask);
 	}
 
 	[HttpPut("{id}")]
-	public async Task<IActionResult> UpdateJiraTask(int id, JiraTask inputJiraTask)
+	public async Task<IActionResult> UpdateJiraTask(Guid id, JiraTask inputJiraTask)
 	{
-		var jiraTask = await _db.JiraTasks.FindAsync(id);
+		var jiraTask = await _db.GetJiraTaskByIdAsync(id.ToString());
 
 		if (jiraTask == null)
 			return NotFound();
 
-		jiraTask.Name = inputJiraTask.Name;
-		jiraTask.Status = inputJiraTask.Status;
-		jiraTask.AssignedTo = inputJiraTask.AssignedTo;
-		jiraTask.Description = inputJiraTask.Description;
-
 		var validator = new JiraTaskValidator();
-		ValidationResult result = await validator.ValidateAsync(jiraTask);
+		ValidationResult result = await validator.ValidateAsync(inputJiraTask);
 
 		if (!result.IsValid)
 		{
 			return BadRequest(result.Errors);
 		}
 
-		await _db.SaveChangesAsync();
+		/*jiraTask.Name = inputJiraTask.Name;
+		jiraTask.Status = inputJiraTask.Status;
+		jiraTask.AssignedTo = inputJiraTask.AssignedTo;
+		jiraTask.Description = inputJiraTask.Description;*/
+		await _db.UpdateJiraTaskAsync(inputJiraTask);
 
 		return NoContent();
 	}
 
 	[HttpDelete("{id}")]
-	public async Task<IActionResult> DeleteJiraTask(int id)
+	public async Task<IActionResult> DeleteJiraTask(Guid id)
 	{
-		var jiraTask = await _db.JiraTasks.FindAsync(id);
+		var jiraTask = await _db.GetJiraTaskByIdAsync(id.ToString());
 
 		if (jiraTask == null)
 			return NotFound();
 
-		_db.JiraTasks.Remove(jiraTask);
-		await _db.SaveChangesAsync();
+		await _db.DeleteJiraTaskAsync(id.ToString());
 
 		return NoContent();
 	}

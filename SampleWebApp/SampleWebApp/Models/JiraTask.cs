@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
 
 public enum JiraStatuses
 {
@@ -20,7 +20,8 @@ public enum Assignees
 
 public class JiraTask
 {
-	public int Id { get; set; }
+	[JsonProperty(PropertyName = "id")]
+	public Guid Id { get; set; }
 	public required string Name { get; set; }
 	public JiraStatuses Status { get; set; }
 	public required Assignees AssignedTo { get; set; }
@@ -30,6 +31,7 @@ public class JiraTask
 
 	public JiraTask()
 	{
+		Id = Guid.NewGuid();
 		Status = JiraStatuses.ToDo; // Set default value to ToDo
 		Description = "I belong to JiraTask model in SampleWebApp project";
 	}

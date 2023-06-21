@@ -9,6 +9,7 @@ public class JiraTaskDb : DbContext
 }*/
 
 using Microsoft.Azure.Cosmos;
+using System.Net;
 
 public class JiraTaskDb
 {
@@ -40,10 +41,18 @@ public class JiraTaskDb
 		return results;
 	}
 
-	public async Task<JiraTask> GetJiraTaskByIdAsync(string id)
+	public async Task<JiraTask?> GetJiraTaskByIdAsync(string id)
 	{
-		var response = await _container.ReadItemAsync<JiraTask>(id, new PartitionKey(id));
-		return response.Resource;
+		try
+		{
+			var response = await _container.ReadItemAsync<JiraTask>(id, new PartitionKey(id));
+			return response.Resource;
+		}
+		catch (CosmosException ex) when (ex.StatusCode == HttpStatusCode.NotFound)
+		{
+			// Item with the specified id was not found
+			return null;
+		}
 	}
 
 	public async Task AddJiraTaskAsync(JiraTask task)

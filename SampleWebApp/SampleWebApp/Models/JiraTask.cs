@@ -27,8 +27,6 @@ public class JiraTask
 	public required Assignees AssignedTo { get; set; }
 	public string Description { get; set; }
 
-	//public required string Email {get;set;}
-
 	public JiraTask()
 	{
 		Id = Guid.NewGuid();

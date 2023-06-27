@@ -19,7 +19,7 @@ export enum Assignees {
 }
 
 export interface JiraTask {
-  id: number;
+  id: string;
   name: string;
   status: JiraStatuses;
   assignedTo: Assignees;
@@ -36,7 +36,7 @@ export class SharedService {
 
   loadJiraTasks(): void {
     this.http
-      .get<JiraTask[]>('https://localhost:7218/jiratasks')
+      .get<JiraTask[]>('https://localhost:7218/api/JiraTasks')
       .subscribe(tasks => {
         this.jiraTasksSubject.next(tasks);
       });

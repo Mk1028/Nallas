@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { JiraTask, JiraStatuses, Assignees, SharedService} from '../shared.service';
 import { ModalComponent } from '../modal/modal.component';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { Guid } from "guid-typescript";
 
 @Component({
   selector: 'app-jira-tasks',
@@ -13,7 +14,7 @@ export class JiraTasksComponent implements OnInit {
   @ViewChild('nameInput') nameInput!: ElementRef;
 
   updateTask: JiraTask = {
-    id: 0,
+    id: Guid.createEmpty().toString(),
     name: '',
     status: JiraStatuses.ToDo,
     assignedTo: Assignees.Person1
@@ -46,7 +47,7 @@ export class JiraTasksComponent implements OnInit {
     console.log('Updated Task:', this.updateTask);
     this.http
       .put<void>(
-        `https://localhost:7218/jiratasks/${this.updateTask.id}`,
+        `https://localhost:7218/api/JiraTasks/${this.updateTask.id}`,
         this.updateTask
       )
       .subscribe(() => {
@@ -59,7 +60,7 @@ export class JiraTasksComponent implements OnInit {
 
   deleteTask(task: JiraTask): void {
     this.http
-      .delete<void>(`https://localhost:7218/jiratasks/${task.id}`)
+      .delete<void>(`https://localhost:7218/api/JiraTasks/${task.id}`)
       .subscribe(() => {
         this.jiraTasks = this.jiraTasks.filter(t => t.id !== task.id);
       });

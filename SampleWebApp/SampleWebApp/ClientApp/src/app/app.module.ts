@@ -1,15 +1,18 @@
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { JiraTasksComponent } from './jira-tasks/jira-tasks.component';
-import { ModalComponent } from './modal/modal.component';
-import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
+import { ModalComponent } from './modal/modal.component'
 import { SharedService } from './shared.service';
+import { AutocompleteService } from './autocomplete.service';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 
 @NgModule({
   declarations: [
@@ -20,15 +23,13 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
     FormsModule,
-    MdbModalModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     MdbFormsModule,
-    ReactiveFormsModule
+    MdbModalModule
   ],
-  providers: [
-    SharedService
-  ],
+  providers: [SharedService, AutocompleteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
